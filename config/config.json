@@ -1,23 +1,23 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "postgres",
-    "database": "WDS Project",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+    "username": "${DB_USERNAME}",
+    "password": "${DB_PASSWORD}",
+    "database": "${DB_DATABASE}",
+    "host": "${DB_HOST}",
+    "dialect": "${DB_DIALECT}"
   },
   "test": {
-    "username": "postgres",
-    "password": "postgres",
-    "database": "test WDS",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+    "username": "${DB_USERNAME}",
+    "password": "${DB_PASSWORD}",
+    "database": "${DB_DATABASE_TEST}",
+    "host": "${DB_HOST}",
+    "dialect": "${DB_DIALECT}"
   },
   "production": {
-    "username": "postgres",
-    "password": "postgres",
-    "database": "WDS Project",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+    "username": "${DB_USERNAME}",
+    "password": "${DB_PASSWORD}",
+    "database": "${DB_DATABASE_PROD}",
+    "host": "${DB_HOST}",
+    "dialect": "${DB_DIALECT}"
   }
 }
