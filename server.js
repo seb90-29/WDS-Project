@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const expressEjsLayouts = require('express-ejs-layouts')
 const expressLayouts = require('express-ejs-layouts')
@@ -16,7 +17,7 @@ app.use('/', indexRouter)
 
 const startServer = async () => {
     try {
-      await testConnection(); // Test the database connection
+      await testConnection()
   
       app.listen(PORT, () => {
         console.log(`Server started on port ${PORT}`)
