@@ -19,7 +19,10 @@ module.exports = (sequelize) => {
       },
       onDelete: 'CASCADE',
     },
-  })
+  }, {
+    timestamps: false,
+  }
+)
 
   FactionDescription.associate = (models) => {
     FactionDescription.belongsTo(models.Faction, { foreignKey: 'factionId', as: 'faction' })

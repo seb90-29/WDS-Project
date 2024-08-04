@@ -18,8 +18,11 @@ module.exports = (sequelize) => {
         key: 'id',
       },
       onDelete: 'CASCADE',
-    },
-  })
+    }, 
+  }, {
+    timestamps: false,
+  }
+)
 
   Faction.associate = (models) => {
     Faction.belongsTo(models.BattleSystem, { foreignKey: 'battleSystemId', as: 'battleSystem' })

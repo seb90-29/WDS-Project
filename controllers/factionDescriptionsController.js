@@ -1,11 +1,9 @@
-const { FactionDescription, Faction } = require('../models')
+const { FactionDescription } = require('../models')
 
 // GET all faction descriptions
 exports.getAllFactionDescriptions = async (req, res) => {
   try {
-    const factionDescriptions = await FactionDescription.findAll({
-      include: [Faction]
-    })
+    const factionDescriptions = await FactionDescription.findAll()
     res.json(factionDescriptions)
   } catch (error) {
     res.status(500).json({ error: 'Unable to fetch faction descriptions' })
@@ -15,9 +13,7 @@ exports.getAllFactionDescriptions = async (req, res) => {
 // GET a faction description by ID
 exports.getFactionDescriptionById = async (req, res) => {
   try {
-    const factionDescription = await FactionDescription.findByPk(req.params.id, {
-      include: [Faction]
-    })
+    const factionDescription = await FactionDescription.findByPk(req.params.id)
     if (factionDescription) {
       res.json(factionDescription)
     } else {

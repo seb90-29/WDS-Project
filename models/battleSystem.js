@@ -11,11 +11,12 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-  });
+  }, {
+    timestamps: false,
+  })
 
   BattleSystem.associate = (models) => {
     BattleSystem.hasMany(models.Faction, { foreignKey: 'battleSystemId', onDelete: 'CASCADE' })
   }
-
   return BattleSystem
 }

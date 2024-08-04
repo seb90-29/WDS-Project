@@ -1,23 +1,20 @@
-const { Faction, BattleSystem } = require('../models')
+const { Faction } = require('../models')
 
 // GET all factions
 exports.getAllFactions = async (req, res) => {
   try {
-    const factions = await Faction.findAll({
-      include: [BattleSystem]
-    })
+    const factions = await Faction.findAll()
     res.json(factions)
   } catch (error) {
     res.status(500).json({ error: 'Unable to fetch factions' })
   }
 }
 
+
 // GET a single faction by ID
 exports.getFactionById = async (req, res) => {
   try {
-    const faction = await Faction.findByPk(req.params.id, {
-      include: [BattleSystem]
-    })
+    const faction = await Faction.findByPk(req.params.id)
     if (faction) {
       res.json(faction)
     } else {
@@ -47,9 +44,7 @@ exports.updateFaction = async (req, res) => {
       where: { id: req.params.id }
     })
     if (updated) {
-      const updatedFaction = await Faction.findByPk(req.params.id, {
-        include: [BattleSystem]
-      })
+      const updatedFaction = await Faction.findByPk(req.params.id)
       res.json(updatedFaction)
     } else {
       res.status(404).json({ error: 'Faction not found' })
