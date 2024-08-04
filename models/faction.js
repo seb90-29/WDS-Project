@@ -11,14 +11,20 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    middleEarthId: {
+    battleSystemId: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'MiddleEarth',
+        model: 'BattleSystems',
         key: 'id',
       },
+      onDelete: 'CASCADE',
     },
   })
+
+  Faction.associate = (models) => {
+    Faction.belongsTo(models.BattleSystem, { foreignKey: 'battleSystemId', as: 'battleSystem' })
+    Faction.hasOne(models.FactionDescription, { foreignKey: 'factionId', as: 'description', onDelete: 'CASCADE' })
+  }
 
   return Faction
 }

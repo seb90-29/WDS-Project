@@ -1,21 +1,21 @@
 const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) => {
-  const MiddleEarth = sequelize.define('MiddleEarth', {
+  const BattleSystem = sequelize.define('BattleSystem', {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    ForcesOfRighteousness: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    ForcesOfEvil: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-  })
+  });
 
-  return MiddleEarth
+  BattleSystem.associate = (models) => {
+    BattleSystem.hasMany(models.Faction, { foreignKey: 'battleSystemId', onDelete: 'CASCADE' })
+  }
+
+  return BattleSystem
 }

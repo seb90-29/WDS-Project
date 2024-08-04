@@ -1,29 +1,29 @@
 const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) => {
-  const UnitSkill = sequelize.define('UnitSkill', {
+  const FactionDescription = sequelize.define('FactionDescription', {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    skillName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     description: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    unitId: {
+    factionId: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'Units',
+        model: 'Factions',
         key: 'id',
       },
       onDelete: 'CASCADE',
     },
   })
 
-  return UnitSkill
+  FactionDescription.associate = (models) => {
+    FactionDescription.belongsTo(models.Faction, { foreignKey: 'factionId', as: 'faction' })
+  }
+
+  return FactionDescription
 }
