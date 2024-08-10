@@ -1,4 +1,4 @@
-const { FactionDescription } = require('../models')
+const { FactionDescription } = require('../../models')
 
 // GET all faction descriptions
 exports.getAllFactionDescriptions = async (req, res) => {

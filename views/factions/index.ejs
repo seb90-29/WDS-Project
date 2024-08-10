@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Factions in <%= battleSystem.name %></title>
+</head>
+<body>
+    <h1>Factions in <%= battleSystem.name %></h1>
+    <ul>
+        <% factions.forEach(faction => { %>
+            <li><a href="/factions/<%= faction.id %>"><%= faction.name %></a></li>
+        <% }); %>
+    </ul>
+    <a href="/battle-systems">Back to Battle Systems</a>
+</body>
+</html>

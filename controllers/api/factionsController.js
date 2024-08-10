@@ -1,4 +1,4 @@
-const { Faction } = require('../models')
+const { Faction } = require('../../models')
 
 // GET all factions
 exports.getAllFactions = async (req, res) => {
@@ -57,15 +57,14 @@ exports.updateFaction = async (req, res) => {
 // DELETE a faction
 exports.deleteFaction = async (req, res) => {
   try {
-    const deleted = await Faction.destroy({
-      where: { id: req.params.id }
-    })
+    const { id } = req.params
+    const deleted = await Faction.destroy({ where: { id } })
     if (deleted) {
-      res.status(204).json();
+      res.status(204).send()
     } else {
       res.status(404).json({ error: 'Faction not found' })
     }
   } catch (error) {
-    res.status(500).json({ error: 'Unable to delete faction' })
+    res.status(400).json({ error: 'Unable to delete faction' })
   }
 }

@@ -1,5 +1,5 @@
 
-const { BattleSystem } = require('../models')
+const { BattleSystem } = require('../../models')
 
 //GET all
 exports.getAllBattleSystems = async (req, res) => {

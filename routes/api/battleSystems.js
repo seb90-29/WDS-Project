@@ -6,7 +6,7 @@ const {
   createBattleSystem,
   updateBattleSystem,
   deleteBattleSystem
-} = require('../controllers/battleSystemsController')
+} = require('../../controllers/api/battleSystemsController')
 
 router.get('/', getAllBattleSystems)
 router.get('/:id', getBattleSystemById)

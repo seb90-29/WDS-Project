@@ -3,9 +3,18 @@ const express = require('express')
 const expressEjsLayouts = require('express-ejs-layouts')
 const testConnection = require('./config/test-connection')
 const indexRouter = require('./routes/index')
-const battleSystemsRouter = require('./routes/battleSystems')
-const factionsRouter = require('./routes/factions')
-const factionDescriptionsRouter = require('./routes/factionDescriptions')
+
+//API routes import
+const battleSystemsRouter = require('./routes/api/battleSystems')
+const factionsRouter = require('./routes/api/factions')
+const factionDescriptionsRouter = require('./routes/api/factionDescriptions')
+
+//Render import
+const renderBattleSystemsRouter = require('./routes/render/battleSystems')
+const renderFactionsRouter = require('./routes/render/factions')
+const renderFactionDescriptionsRouter = require('./routes/render/factionDescriptions')
+
+//Database import
 const db = require('./models')
 
 const app = express()
@@ -17,11 +26,17 @@ app.set('layout', 'layouts/layout')
 app.use(expressEjsLayouts)
 app.use(express.static('public'))
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 app.use('/', indexRouter)
-app.use('/battle-systems', battleSystemsRouter)
-app.use('/factions', factionsRouter)
-app.use('/faction-descriptions', factionDescriptionsRouter)
+//API routes
+app.use('/api/battle-systems', battleSystemsRouter)
+app.use('/api/factions', factionsRouter)
+app.use('/api/faction-descriptions', factionDescriptionsRouter)
 
+//Render routes
+app.use('/render/battle-systems', renderBattleSystemsRouter)
+app.use('/render/factions', renderFactionsRouter)
+app.use('/render/faction-descriptions', renderFactionDescriptionsRouter)
 
 const startServer = async () => {
   try {

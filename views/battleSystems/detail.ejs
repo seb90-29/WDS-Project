@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Battle Systems</title>
+</head>
+<body>
+    <h1>Battle Systems</h1>
+    <ul>
+        <% battleSystems.forEach(system => { %>
+            <li><a href="/battle-systems/<%= system.id %>"><%= system.name %></a></li>
+        <% }); %>
+    </ul>
+</body>
+</html>
