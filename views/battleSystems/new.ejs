@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Battle System</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/render/battle-systems">All Battle Systems</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <h1>Create New Battle System</h1>
+    <form action="/render/battle-systems" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <button type="submit">Create Battle System</button>
+    </form>
+
+    <a href="javascript:history.back()">Back to Battle Systems</a>
+</body>
+</html>

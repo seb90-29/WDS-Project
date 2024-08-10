@@ -1,9 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const {
-  renderFactionDescriptionByFaction
-} = require('../../controllers/render/factionDescriptionsRenderController')
+const renderFactionDescriptionsController = require('../../controllers/render/factionDescriptionsRenderController')
 
-router.get('/faction/:factionId', renderFactionDescriptionByFaction)
+router.get('/faction/:id', renderFactionDescriptionsController.renderFactionDescriptionById)
 
 module.exports = router

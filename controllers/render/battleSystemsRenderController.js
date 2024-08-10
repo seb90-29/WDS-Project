@@ -21,3 +21,7 @@ exports.renderBattleSystemById = async (req, res) => {
         res.status(500).render('error', { error: 'Error fetching battle system' })
     }
 }
+
+exports.renderNewBattleSystemForm = async (req, res) => {
+    res.render('battleSystems/new')
+}

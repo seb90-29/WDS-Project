@@ -1,14 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Battle Systems</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Battle Systems</title>
 </head>
 <body>
-    <h1>Battle Systems</h1>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <h1>All Battle Systems</h1>
     <ul>
         <% battleSystems.forEach(system => { %>
-            <li><a href="/battle-systems/<%= system.id %>"><%= system.name %></a></li>
-        <% }); %>
+            <li><a href="/render/factions/battle-system/<%= system.id %>"><%= system.name %></a></li>
+        <% }) %>
     </ul>
+    <a href="/render/battle-systems/new">Create New Battle System</a>
+    <br>
+    <br>
+    <a href="javascript:history.back()">Back to Previous Page</a>
 </body>
 </html>

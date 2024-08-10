@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Factions for <%= battleSystem.name %></title>
+    <title>Error</title>
 </head>
 <body>
     <header>
@@ -15,14 +15,8 @@
         </nav>
     </header>
 
-    <h2>Factions for <%= battleSystem.name %></h2>
-    <ul>
-        <% factions.forEach(faction => { %>
-            <li><a href="/render/faction-descriptions/faction/<%= faction.id %>"><%= faction.name %></a></li>
-        <% }) %>
-    </ul>
-    <a href="/render/factions/new">Add New Faction</a>
-    <br>
+    <h2>Error</h2>
+    <p><%= error %></p>
     <br>
     <a href="javascript:history.back()">Back to Previous Page</a>
 </body>

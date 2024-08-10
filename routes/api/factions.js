@@ -6,7 +6,7 @@ const {
   createFaction,
   updateFaction,
   deleteFaction
-} = require('../controllers/factionsController')
+} = require('../../controllers/api/factionsController')
 
 router.get('/', getAllFactions)
 router.get('/:id', getFactionById)
