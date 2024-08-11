@@ -1,4 +1,4 @@
-const { BattleSystem } = require('../../models')
+const { Faction, FactionDescription, BattleSystem } = require('../../models')
 
 exports.renderAllBattleSystems = async (req, res) => {
     try {
@@ -22,6 +22,20 @@ exports.renderBattleSystemById = async (req, res) => {
     }
 }
 
-exports.renderNewBattleSystemForm = async (req, res) => {
+exports.renderNewBattleSystemForm = (req, res) => {
     res.render('battleSystems/new')
 }
+
+exports.handleCreateBattleSystem = async (req, res) => {
+    try {
+      const { name } = req.body;
+      await BattleSystem.create({ name })
+      res.redirect('/render/battle-systems')
+    } catch (error) {
+      if (error.name === 'SequelizeUniqueConstraintError') {
+        res.status(409).render('error', { error: 'A battle system with that name already exists.' })
+      } else {
+        res.status(500).render('error', { error: 'Error creating new battle system' })
+      }
+    }
+  }

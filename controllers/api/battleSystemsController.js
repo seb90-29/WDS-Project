@@ -32,7 +32,11 @@ exports.createBattleSystem = async (req, res) => {
     const newBattleSystem = await BattleSystem.create({ name })
     res.status(201).json(newBattleSystem)
   } catch (error) {
-    res.status(500).json({ error: 'Unable to create battle system' })
+    if (error.name === 'SequelizeUniqueConstraintError') {
+      res.status(409).json({ error: 'A battle system with that name already exists.' })
+    } else {
+      res.status(500).json({ error: 'Unable to create battle system' })
+    }
   }
 }
 

@@ -1,4 +1,4 @@
-const { Faction, FactionDescription } = require('../../models')
+const { Faction, FactionDescription, BattleSystem } = require('../../models')
 
 exports.renderFactionDescriptionById = async (req, res) => {
     try {

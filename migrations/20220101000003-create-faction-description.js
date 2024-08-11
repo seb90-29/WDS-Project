@@ -12,6 +12,10 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: false,
       },
+      imageUrl: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
       factionId: {
         type: Sequelize.INTEGER,
         references: {

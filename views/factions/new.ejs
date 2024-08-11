@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Faction</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/render/battle-systems">Battle Systems</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <h2>Add New Faction</h2>
+    <form action="/render/factions/battle-system/<%= battleSystemId %>" method="post">
+        <label for="name">Faction Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea>
+
+        <button type="submit">Add Faction</button>
+    </form>
+
+    <a href="/render/factions/battle-system/<%= battleSystemId %>">Back to Factions</a>
+    <br>
+    <a href="javascript:history.back()">Back to Previous Page</a>
+</body>
+</html>
