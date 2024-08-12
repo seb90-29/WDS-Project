@@ -1,3 +1,5 @@
 # Ignore following:
 .env
 node_modules
+/public/uploads/
+removeObsoletePictures.js

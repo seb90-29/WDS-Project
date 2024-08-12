@@ -1,12 +1,8 @@
 require('dotenv').config()
 const express = require('express')
 const expressEjsLayouts = require('express-ejs-layouts')
-const multer = require('multer');
 const testConnection = require('./config/test-connection')
 const indexRouter = require('./routes/index')
-
-// Set up multer for file uploads
-const upload = multer({ dest: 'public/uploads/' })
 
 // API and Render routes import
 const battleSystemsRouter = require('./routes/api/battleSystems')
@@ -28,7 +24,6 @@ app.use(expressEjsLayouts)
 app.use(express.static('public'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(upload.array())
 app.use('/', indexRouter)
 
 // API and Render routes

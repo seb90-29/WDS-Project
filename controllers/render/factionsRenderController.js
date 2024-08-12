@@ -1,7 +1,6 @@
 const { Faction, FactionDescription, BattleSystem } = require('../../models')
-
-const multer = require('multer');
-const upload = multer({ dest: 'public/uploads/' })
+const fs = require('fs')
+const path = require('path')
 
 exports.validateBattleSystemId = (req, res, next) => {
     const battleSystemId = req.params.battleSystemId || req.query.battleSystemId;
@@ -63,16 +62,22 @@ exports.handleCreateFaction = async (req, res) => {
     const { name, description } = req.body
     const battleSystemId = req.params.battleSystemId || req.body.battleSystemId
     let imagePath = ''
+
     if (req.file) {
         imagePath = `/uploads/${req.file.filename}`
     }
 
     try {
-        const newFaction = await Faction.create({ name, imageUrl: imagePath, battleSystemId })
+        const newFaction = await Faction.create({
+            name, 
+            imageUrl: imagePath,
+            battleSystemId
+        })
         await FactionDescription.create({
-            description: description,
-            factionId: newFaction.id
-        });
+            description,
+            factionId: newFaction.id,
+            imageUrl: imagePath
+        })
 
         res.redirect('/render/factions/battle-system/' + battleSystemId)
     } catch (error) {
@@ -95,5 +100,76 @@ exports.renderAllFactions = async (req, res) => {
     } catch (error) {
         console.error('Error fetching factions:', error)
         res.status(500).render('error', { error: 'Error fetching factions' })
+    }
+}
+
+exports.renderEditFactionForm = async (req, res) => {
+    try {
+        const faction = await Faction.findByPk(req.params.id, {
+            include: [{ model: FactionDescription, as: 'description' }]
+        })
+
+        if (!faction) {
+            return res.status(404).render('error', { error: 'Faction not found' })
+        }
+
+        res.render('factions/edit', { faction })
+    } catch (error) {
+        console.error('Error fetching faction for edit:', error)
+        res.status(500).render('error', { error: 'Error fetching faction for edit' })
+    }
+}
+
+exports.handleEditFaction = async (req, res) => {
+    const { name, description } = req.body
+    let imagePath = req.body.currentImageUrl
+    if (req.file) {
+        imagePath = `/uploads/${req.file.filename}`
+    }
+
+    try {
+        const faction = await Faction.findByPk(req.params.id)
+
+        if (!faction) {
+            return res.status(404).render('error', { error: 'Faction not found' })
+        }
+
+        await faction.update({ name, imageUrl: imagePath })
+        await FactionDescription.update(
+            { description, imageUrl: imagePath },
+            { where: { factionId: faction.id } }
+        )
+
+        res.redirect(`/render/factions/${faction.id}`)
+    } catch (error) {
+        console.error('Error updating faction:', error)
+        res.status(500).render('error', { error: 'Failed to update faction' })
+    }
+}
+
+exports.handleDeleteFaction = async (req, res) => {
+    try {
+        const faction = await Faction.findByPk(req.params.id, {
+            include: [{ model: FactionDescription, as: 'description' }]
+        })
+
+        if (!faction) {
+            return res.status(404).render('error', { error: 'Faction not found' })
+        }
+
+        if (faction.description && faction.description.imageUrl) {
+            const imagePath = path.join(__dirname, '../../public', faction.description.imageUrl)
+            fs.unlink(imagePath, (err) => {
+                if (err) {
+                    console.error('Failed to delete image file:', err)
+                }
+            })
+        }
+
+        await faction.destroy()
+        res.redirect('/render/factions/battle-system/' + faction.battleSystemId)
+    } catch (error) {
+        console.error('Error deleting faction:', error)
+        res.status(500).render('error', { error: 'Failed to delete faction' })
     }
 }

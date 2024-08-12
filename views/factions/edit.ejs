@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add New Faction</title>
+    <title>Edit Faction - <%= faction.name %></title>
 </head>
 <body>
     <header>
@@ -15,23 +15,25 @@
         </nav>
     </header>
 
-    <h2>Add New Faction</h2>
-    <form action="/render/factions/battle-system/<%= battleSystemId %>" method="post" enctype="multipart/form-data">
+    <h1>Edit Faction - <%= faction.name %></h1>
+    <form action="/render/factions/<%= faction.id %>/edit" method="post" enctype="multipart/form-data">
         <label for="name">Faction Name:</label>
-        <input type="text" id="name" name="name" required>
-    
+        <input type="text" id="name" name="name" value="<%= faction.name %>" required>
+
         <label for="description">Description:</label>
-        <textarea id="description" name="description" required></textarea>
-    
+        <textarea id="description" name="description" required><%= faction.description ? faction.description.description : '' %></textarea>
+
         <label for="image">Faction Image:</label>
+        <% if (faction.imageUrl) { %>
+            <img src="<%= faction.imageUrl %>" alt="Image of <%= faction.name %>" style="max-width: 300px;">
+            <input type="hidden" name="currentImageUrl" value="<%= faction.imageUrl %>">
+        <% } %>
         <input type="file" id="image" name="image" accept="image/*">
         <button type="button" onclick="document.getElementById('image').value = '';">Cancel Upload</button>
-    
-        <button type="submit">Add Faction</button>
+
+        <button type="submit">Update Faction</button>
     </form>
 
-    <a href="/render/factions?battleSystemId=<%= battleSystemId %>">Back to Factions</a>
-    <br>
     <a href="javascript:history.back()">Back to Previous Page</a>
 </body>
 </html>

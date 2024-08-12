@@ -17,7 +17,13 @@
     <h1>All Battle Systems</h1>
     <ul>
         <% battleSystems.forEach(system => { %>
-            <li><a href="/render/factions/battle-system/<%= system.id %>"><%= system.name %></a></li>
+            <li>
+                <a href="/render/factions/battle-system/<%= system.id %>"><%= system.name %></a>
+                <a href="/render/battle-systems/<%= system.id %>/edit" style="margin-left: 10px;">Edit</a>
+                <form action="/render/battle-systems/<%= system.id %>/delete" method="post" style="display:inline; margin-left: 10px;">
+                    <button type="submit" onclick="return confirm('Are you sure you want to delete this battle system?')">Delete</button>
+                </form>
+            </li>
         <% }) %>
     </ul>
     <a href="/render/battle-systems/new">Create New Battle System</a>

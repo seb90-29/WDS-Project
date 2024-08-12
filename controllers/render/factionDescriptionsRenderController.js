@@ -13,7 +13,7 @@ exports.renderFactionDescriptionById = async (req, res) => {
         console.log(faction)
 
         if (faction && faction.description) {
-            res.render('factionDescriptions/detail', {
+            res.render('factions/detail', {
                 faction: faction,
                 description: faction.description
             });
