@@ -1,27 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create New Battle System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #000000;
+            color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-image: url('/visual pictures/Main.jpg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        h1 {
+            font-family: 'Garamond', serif;
+            font-size: 2.5em;
+            color: #ffffff;
+            margin-bottom: 0.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        form {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 90%;
+            margin: 20px;
+        }
+
+        label {
+            font-family: Arial, sans-serif;
+            font-size: 1.25em;
+            color: #dddddd;
+            margin-bottom: 10px;
+        }
+
+        input {
+            font-size: 1.25em;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        button {
+            font-family: Arial, sans-serif;
+            font-size: 1.25em;
+            color: #ffffff;
+            background-color: #555555;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        button:hover {
+            background-color: #777777;
+            transform: scale(1.05);
+        }
+
+        a {
+            font-family: Arial, sans-serif;
+            font-size: 1.25em;
+            color: #ffffff;
+            background-color: #555555;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            display: inline-block;
+            margin-top: 1em;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        a:hover {
+            background-color: #777777;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            form,
+            a {
+                font-size: 1em;
+                padding: 8px 16px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/render/battle-systems">All Battle Systems</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <h1>Create New Battle System</h1>
-    <form action="/render/battle-systems" method="post">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-        <button type="submit">Create Battle System</button>
-    </form>
-
-    <a href="javascript:history.back()">Back to Battle Systems</a>
+    <div class="hero">
+        <h1>Create New Battle System</h1>
+        <div class="container">
+            <form action="/render/battle-systems" method="post">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <button type="submit">Create Battle System</button>
+            </form>
+            <a href="javascript:history.back()">Back to Battle Systems</a>
+        </div>
+    </div>
 </body>
+
 </html>
+

@@ -1,28 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Battle System</title>
-</head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/render/battle-systems">Back to Battle Systems</a></li>
-            </ul>
-        </nav>
-    </header>
+    <style>
 
-    <h1>Edit Battle System</h1>
-    <form action="/render/battle-systems/<%= battleSystem.id %>/edit" method="post">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" value="<%= battleSystem.name %>" required>
-        <% if (error) { %>
-            <p style="color: red;"><%= error %></p>
-        <% } %>
-        <button type="submit">Update</button>
-    </form>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #000000;
+            color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-image: url('/visual pictures/Main.jpg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        h1 {
+            font-family: 'Garamond', serif;
+            font-size: 3em;
+            color: #ffffff;
+            margin-bottom: 0.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        label {
+            font-family: Arial, sans-serif;
+            font-size: 1.25em;
+            margin-bottom: 0.5em;
+            display: block;
+            color: #dddddd;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 1em;
+            border-radius: 5px;
+            border: none;
+            font-size: 1em;
+            background-color: #2a2a2a;
+            color: #f0f0f0;
+        }
+
+        button, a {
+            font-family: Arial, sans-serif;
+            font-size: 1.25em;
+            color: #ffffff;
+            background-color: #555555;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            display: inline-block;
+            margin-top: 1em;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        button:hover, a:hover {
+            background-color: #777777;
+            transform: scale(1.05);
+        }
+
+        .form-container {
+            text-align: center;
+            padding: 50px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+            max-width: 90%;
+            margin: 20px;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 1em;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            label, input[type="text"], button, a {
+                font-size: 1em;
+            }
+
+            .form-container {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-container">
+        <h1>Edit Battle System</h1>
+        <form action="/render/battle-systems/<%= battleSystem.id %>/edit" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" value="<%= battleSystem.name %>" required>
+            <% if (typeof error !== 'undefined') { %>
+                <p class="error-message"><%= error %></p>
+            <% } %>
+            <button type="submit">Update</button>
+        </form>
+        <br>
+        <a href="javascript:history.back()">Back to Previous Page</a>
+    </div>
 </body>
+
 </html>
