@@ -4,21 +4,27 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "DevStart": "nodemon server.js"
+    "DevStart": "nodemon server.js",
+    "test": "mocha"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "chai": "^4.3.6",
+    "chai-http": "^4.3.0",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
     "express-ejs-layouts": "^2.5.1",
+    "mocha": "^10.7.3",
     "multer": "^1.4.5-lts.1",
     "pg": "^8.12.0",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.37.3",
-    "sequelize-cli": "^6.6.2"
+    "sequelize-cli": "^6.6.2",
+    "sinon": "^18.0.0",
+    "supertest": "^7.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.4"

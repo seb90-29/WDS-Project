@@ -13,7 +13,8 @@ exports.renderBattleSystemById = async (req, res) => {
     try {
         const battleSystem = await BattleSystem.findByPk(req.params.id)
         if (battleSystem) {
-            res.render('battleSystems/detail', { battleSystem })
+            // Since detail.ejs doesn't exist, we'll redirect to the list page
+            res.redirect('/render/battle-systems')
         } else {
             res.status(404).render('error', { error: 'Battle system not found' })
         }
@@ -38,9 +39,9 @@ exports.handleCreateBattleSystem = async (req, res) => {
         res.status(500).render('error', { error: 'Error creating new battle system' })
       }
     }
-  }
+}
 
-  exports.renderEditBattleSystemForm = async (req, res) => {
+exports.renderEditBattleSystemForm = async (req, res) => {
     try {
         const battleSystem = await BattleSystem.findByPk(req.params.id)
         if (!battleSystem) {
@@ -71,6 +72,7 @@ exports.handleEditBattleSystem = async (req, res) => {
         }
     }
 }
+
 exports.handleDeleteBattleSystem = async (req, res) => {
     try {
         const battleSystem = await BattleSystem.findByPk(req.params.id)

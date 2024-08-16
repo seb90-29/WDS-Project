@@ -3,10 +3,10 @@ const fs = require('fs')
 const path = require('path')
 
 exports.validateBattleSystemId = (req, res, next) => {
-    const battleSystemId = req.params.battleSystemId || req.query.battleSystemId;
+    const battleSystemId = req.params.battleSystemId || req.query.battleSystemId
     console.log("battleSystemId:", battleSystemId)
     if (!battleSystemId) {
-        console.error('No battleSystemId provided:', req.originalUrl);
+        console.error('No battleSystemId provided:', req.originalUrl)
         return res.status(400).render('error', { error: 'Battle system ID is required' })
     }
     if (!/^\d+$/.test(battleSystemId)) {
