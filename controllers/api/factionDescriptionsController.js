@@ -1,4 +1,6 @@
 const { FactionDescription } = require('../../models')
+const fs = require('fs')
+const path = require('path')
 
 // GET all faction descriptions
 exports.getAllFactionDescriptions = async (req, res) => {
@@ -27,9 +29,15 @@ exports.getFactionDescriptionById = async (req, res) => {
 // POST a new faction description
 exports.createFactionDescription = async (req, res) => {
   try {
-    const { description, factionId } = req.body;
-    const newFactionDescription = await FactionDescription.create({ description, factionId });
-    res.status(201).json(newFactionDescription);
+    const { description, factionId } = req.body
+    let imageUrl = ''
+
+    if (req.file) {
+      imageUrl = `/uploads/${req.file.filename}`
+    }
+
+    const newFactionDescription = await FactionDescription.create({ description, factionId, imageUrl })
+    res.status(201).json(newFactionDescription)
   } catch (error) {
     res.status(400).json({ error: 'Unable to create faction description' })
   }
@@ -39,13 +47,30 @@ exports.createFactionDescription = async (req, res) => {
 exports.updateFactionDescription = async (req, res) => {
   try {
     const { id } = req.params
-    const { description, factionId } = req.body
+    const { description, factionId, currentImageUrl } = req.body
+    let imageUrl = currentImageUrl
+
+    if (req.file) {
+      imageUrl = `/uploads/${req.file.filename}`
+
+      // If the image has changed, delete the old image
+      if (currentImageUrl && currentImageUrl !== imageUrl) {
+        const oldImagePath = path.join(__dirname, '../../public', currentImageUrl)
+        fs.unlink(oldImagePath, (err) => {
+          if (err) {
+            console.error('Failed to delete old image:', err)
+          }
+        })
+      }
+    }
+
     const [updated] = await FactionDescription.update(
-      { description, factionId },
+      { description, factionId, imageUrl },
       { where: { id } }
     )
+
     if (updated) {
-      const updatedFactionDescription = await FactionDescription.findByPk(id);
+      const updatedFactionDescription = await FactionDescription.findByPk(id)
       res.json(updatedFactionDescription)
     } else {
       res.status(404).json({ error: 'Faction description not found' })
@@ -59,13 +84,26 @@ exports.updateFactionDescription = async (req, res) => {
 exports.deleteFactionDescription = async (req, res) => {
   try {
     const { id } = req.params
-    const deleted = await FactionDescription.destroy({ where: { id } })
-    if (deleted) {
-      res.status(204).send()
-    } else {
-      res.status(404).json({ error: 'Faction description not found' })
+    const factionDescription = await FactionDescription.findByPk(id)
+
+    if (!factionDescription) {
+      return res.status(404).json({ error: 'Faction description not found' })
     }
+
+    // Delete the associated image if it exists
+    if (factionDescription.imageUrl) {
+      const imagePath = path.join(__dirname, '../../public', factionDescription.imageUrl)
+      fs.unlink(imagePath, (err) => {
+        if (err) {
+          console.error('Failed to delete image file:', err)
+        }
+      })
+    }
+
+    await factionDescription.destroy()
+    res.status(204).send()
   } catch (error) {
+    console.error('Error during deletion:', error)
     res.status(400).json({ error: 'Unable to delete faction description' })
   }
 }

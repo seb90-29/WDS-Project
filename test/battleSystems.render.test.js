@@ -30,7 +30,7 @@ describe('BattleSystems', () => {
     sinon.restore()
   })
 
-  // Positive test: Render all battle systems
+  // Positive test: Handle Rendering all battle systems
   it('should render all battle systems', async () => {
     const res = await chai.request(app).get('/render/battle-systems')
     expect(res).to.have.status(200)
@@ -45,7 +45,7 @@ describe('BattleSystems', () => {
     expect(res.text).to.include('Unable to fetch battle systems')
   })
 
-  // Positive test: Render battle system by ID
+  // Positive test: Handle Rendering battle system by ID
   it('should redirect when rendering a battle system by ID', async () => {
     const res = await chai.request(app).get('/render/battle-systems/1')
     expect(res).to.have.status(200)

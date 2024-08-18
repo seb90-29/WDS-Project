@@ -28,9 +28,9 @@ exports.getFactionById = async (req, res) => {
 // POST a new faction
 exports.createFaction = async (req, res) => {
   try {
-    const { name, battleSystemId } = req.body;
+    const { name, battleSystemId } = req.body
     const newFaction = await Faction.create({ name, battleSystemId })
-    res.status(201).json(newFaction);
+    res.status(201).json(newFaction)
   } catch (error) {
     res.status(500).json({ error: 'Unable to create faction' })
   }
@@ -39,7 +39,7 @@ exports.createFaction = async (req, res) => {
 // PUT an existing faction
 exports.updateFaction = async (req, res) => {
   try {
-    const { name, battleSystemId } = req.body;
+    const { name, battleSystemId } = req.body
     const [updated] = await Faction.update({ name, battleSystemId }, {
       where: { id: req.params.id }
     })

@@ -1,4 +1,3 @@
-
 const { BattleSystem } = require('../../models')
 
 //GET all
@@ -18,7 +17,7 @@ exports.getBattleSystemById = async (req, res) => {
     if (battleSystem) {
       res.json(battleSystem)
     } else {
-      res.status(404).json({ error: 'Battle system not found' });
+      res.status(404).json({ error: 'Battle system not found' })
     }
   } catch (error) {
     res.status(500).json({ error: 'Unable to fetch battle system' })
